@@ -1,12 +1,15 @@
-
-// Import express
+require('dotenv').config();
 const express = require('express');
 const app = express();
+const path = require('path');
 
 // قراءة مفتاح Pi Network من Configurations (Secrets)
 const validationKey = process.env.VALIDATION_KEY;
 
-// صفحة رئيسية تعرض المفتاح (اختياري، فقط للتأكد)
+// قدم الملفات الثابتة من المجلد الحالي
+app.use(express.static(path.join(__dirname)));
+
+// صفحة رئيسية تعرض المفتاح
 app.get('/', (req, res) => {
   res.send(`Pi Validation Key is: ${validationKey}`);
 });
@@ -15,5 +18,5 @@ app.get('/', (req, res) => {
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log(`Pi Validation Key: ${validationKey}`); // للتأكد من أن المفتاح مقروء
+  console.log(`Pi Validation Key: ${validationKey}`);
 });
