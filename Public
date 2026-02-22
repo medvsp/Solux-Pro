@@ -1,0 +1,19 @@
+
+// Import express
+const express = require('express');
+const app = express();
+
+// قراءة مفتاح Pi Network من Configurations (Secrets)
+const validationKey = process.env.VALIDATION_KEY;
+
+// صفحة رئيسية تعرض المفتاح (اختياري، فقط للتأكد)
+app.get('/', (req, res) => {
+  res.send(`Pi Validation Key is: ${validationKey}`);
+});
+
+// تشغيل السيرفر على المنفذ 3000 أو المنفذ الافتراضي من Replit
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`Pi Validation Key: ${validationKey}`); // للتأكد من أن المفتاح مقروء
+});
